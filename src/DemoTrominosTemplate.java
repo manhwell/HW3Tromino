@@ -6,8 +6,9 @@ import java.util.Random;
  *
  * YOU JUST NEED TO FINISH THE CODE FOR THE containsForbidden() AND doTiling() METHODS
  *
- * Author:  YOUR NAME GOES HERE
+ * Author:  C2C Manuel Riolo
  *
+ * Documentation: None, except Tromino Worksheet sudo code
  */
 public class DemoTrominosTemplate {
 
@@ -18,7 +19,7 @@ public class DemoTrominosTemplate {
     */
    public static void main(String[] args) {
    
-      int SIZE = 8;    // must be a power of 2
+      int SIZE = 16;    // must be a power of 2
       
       // randomly place the forbidden tile
       
@@ -196,8 +197,8 @@ class TrominoTiling {
 	  // YOUR CODE CODES HERE
       if(size == 2){
          for(int i = startRow; i <= endRow; i++){
-            for(int j = startCol; j <= endCol; j++){
-               if (!trominoBoard[i][j]) {
+            for(int j = startCol; j <= endCol; j++){ // Go through each tile in a 2x2 square
+               if (!trominoBoard[i][j]) { // If the square isn't forbidden, fill it in
                   g.setColor(trominoColor);
                   g.fillRect((this.BOARD_SIZE/this.size) * i, (this.BOARD_SIZE/this.size) * j, (this.BOARD_SIZE/this.size), (this.BOARD_SIZE/this.size));
                   panel.copyGraphicsToScreen();
@@ -207,7 +208,7 @@ class TrominoTiling {
       }
       else{
          // Quarter 1
-            if(this.containsForbidden(startRow, midRow, startCol, midCol)){
+            if(this.containsForbidden(startRow, midRow, startCol, midCol)){ // If the square already has a forbidden square, just fill it in
                doTiling(startRow, midRow, startCol, midCol);
             }
             else{
@@ -219,38 +220,38 @@ class TrominoTiling {
                panel.copyGraphicsToScreen();
             }
          // Quarter 2
-            if(this.containsForbidden(startRow, midRow, midCol+1, endCol)){
+            if(this.containsForbidden(startRow, midRow, midCol+1, endCol)){ // If the square already has a forbidden square, just fill it in
                doTiling(startRow, midRow, midCol+1, endCol);
             }
             else{
-               trominoBoard[midRow][midCol+1] = true;
-               doTiling(startRow, midRow, midCol+1, endCol);
+               trominoBoard[midRow][midCol+1] = true; // Put forbidden cell into the quarterSubArray
+               doTiling(startRow, midRow, midCol+1, endCol); // Recursive call
                trominoBoard[midRow][midCol+1] = false;
-               g.setColor(trominoColor);
+               g.setColor(trominoColor); // Replace the added forbidden cell with a new part of a tromino
                g.fillRect((this.BOARD_SIZE/this.size) * midRow, (this.BOARD_SIZE/this.size) * (midCol+1), (this.BOARD_SIZE/this.size), (this.BOARD_SIZE/this.size));
                panel.copyGraphicsToScreen();
             }
          // Quarter 3
-            if(this.containsForbidden(midRow+1, endRow, startCol, midCol)){
+            if(this.containsForbidden(midRow+1, endRow, startCol, midCol)){ // If the square already has a forbidden square, just fill it in
                doTiling(midRow+1, endRow, startCol, midCol);
             }
             else{
-               trominoBoard[midRow+1][midCol] = true;
-               doTiling(midRow+1, endRow, startCol, midCol);
+               trominoBoard[midRow+1][midCol] = true; // Put forbidden cell into the quarterSubArray
+               doTiling(midRow+1, endRow, startCol, midCol); // Recursive call
                trominoBoard[midRow+1][midCol] = false;
-               g.setColor(trominoColor);
+               g.setColor(trominoColor); // Replace the added forbidden cell with a new part of a tromino
                g.fillRect((this.BOARD_SIZE/this.size) * (midRow+1), (this.BOARD_SIZE/this.size) * midCol, (this.BOARD_SIZE/this.size), (this.BOARD_SIZE/this.size));
                panel.copyGraphicsToScreen();
             }
          // Quarter 4
-            if(this.containsForbidden(midRow+1, endRow, midCol+1, endCol)){
+            if(this.containsForbidden(midRow+1, endRow, midCol+1, endCol)){ // If the square already has a forbidden square, just fill it in
                doTiling(midRow+1, endRow, midCol+1, endCol);
             }
             else{
-               trominoBoard[midRow+1][midCol+1] = true;
-               doTiling(midRow+1, endRow, midCol+1, endCol);
+               trominoBoard[midRow+1][midCol+1] = true; // Put forbidden cell into the quarterSubArray
+               doTiling(midRow+1, endRow, midCol+1, endCol); // Recursive call
                trominoBoard[midRow+1][midCol+1] = false;
-               g.setColor(trominoColor);
+               g.setColor(trominoColor); // Replace the added forbidden cell with a new part of a tromino
                g.fillRect((this.BOARD_SIZE/this.size) * (midRow+1), (this.BOARD_SIZE/this.size) * (midCol+1), (this.BOARD_SIZE/this.size), (this.BOARD_SIZE/this.size));
                panel.copyGraphicsToScreen();
             }
